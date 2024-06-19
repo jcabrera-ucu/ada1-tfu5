@@ -5,11 +5,15 @@ public class CompetenciaIndividual(Disciplina disciplina,
                                    DateOnly fecha, 
                                    List<Atleta> atletas) : ICompetencia
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     public Disciplina Disciplina { get; set; } = disciplina;
 
     public Categoria Categoria { get; set; } = categoria;
 
     public DateOnly Fecha { get; set; } = fecha;
+
+    public List<Juez> Jueces { get; set; } = [];
 
     public List<Atleta> Atletas { get; set; } = atletas;
 

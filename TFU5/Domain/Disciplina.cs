@@ -7,10 +7,27 @@ public interface IDisciplina
     public List<ISubPuntuacion> SubPuntuaciones { get; }
 }
 
-public class Disciplina(string nombre, 
-                        List<ISubPuntuacion> sub_puntuaciones) : IDisciplina
+public class Disciplina : IDisciplina
 {
-    public string Nombre { get; private set; } = nombre;
+    public string Nombre { get; private set; }
 
-    public List<ISubPuntuacion> SubPuntuaciones { get; private set; } = sub_puntuaciones;
+    private List<ISubPuntuacion> _subPuntuaciones;
+
+    public List<ISubPuntuacion> SubPuntuaciones 
+    { 
+        get 
+        {
+            return _subPuntuaciones.Select(x => x.Clone()).ToList();
+        } 
+        private set 
+        { 
+            _subPuntuaciones = value;
+        } 
+    }
+
+    public Disciplina(string nombre, List<ISubPuntuacion> subPuntuaciones)
+    {
+        Nombre = nombre;
+        _subPuntuaciones = subPuntuaciones;
+    }
 }

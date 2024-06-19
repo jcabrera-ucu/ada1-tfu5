@@ -26,9 +26,9 @@ public class AtletasController : ControllerBase
     }
 
     [HttpGet(Name = "List")]
-    public IEnumerable<Atleta> Get()
+    public IEnumerable<AtletaDto> Get()
     {
-        return _atleta_repository.List();
+        return _atleta_repository.List().Select(x => new AtletaDto(x)).ToList();
     }
 
     [HttpPost(Name = "Create")]

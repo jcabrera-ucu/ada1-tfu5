@@ -1,15 +1,15 @@
 using TFU5.Data;
 using TFU5.Domain;
+using TFU5.Domain.Competencia;
 using TFU5.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var atletasRepository = new AtletaMemRepository();
+var competenciaRepository = new CompetenciaMemRepository();
 
-var natacion = new Disciplina("Natación", 
-[
-    new PuntuacionTiempo(),
-]);
+var pt = new PuntuacionTiempo();
+var natacion = new Disciplina("Natación", [pt]);
 
 var ab = new AtletaBuilder
 {
@@ -21,9 +21,21 @@ var ab = new AtletaBuilder
     Disciplinas = [natacion],
 };
 
-atletasRepository.Save(ab.Build());
+var at1 = ab.Build();
+
+atletasRepository.Save(at1);
+
+var comp = new CompetenciaIndividual(
+    natacion, 
+    new Categoria(Genero.Masculino, CategoriaEdad.Mayor, CategoriaPeso.Cualquiera),
+    new DateOnly(2024, 6, 19),
+    [at1]
+);
+
+competenciaRepository.Save(comp);
 
 builder.Services.AddSingleton<IAtletaRepository>(atletasRepository);
+builder.Services.AddSingleton<ICompetenciaRepository>(competenciaRepository);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
