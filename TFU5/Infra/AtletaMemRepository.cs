@@ -1,6 +1,7 @@
 using TFU5.Domain;
+using TFU5.Data;
 
-namespace TFU5.Data;
+namespace TFU5.Infra;
 
 public class AtletaMemRepository : IAtletaRepository
 {
