@@ -1,6 +1,29 @@
+using TFU5.Data;
+using TFU5.Domain;
+using TFU5.Infra;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var atletasRepository = new AtletaMemRepository();
+
+var natacion = new Disciplina("Natación", 
+[
+    new PuntuacionTiempo(),
+]);
+
+var ab = new AtletaBuilder
+{
+    Nombre = "Juan",
+    Apellido = "Cabrera",
+    Genero = Genero.Masculino,
+    Pais = Pais.Uruguay,
+    FechaDeNacimiento = new DateOnly(1991, 3, 27),
+    Disciplinas = [natacion],
+};
+
+atletasRepository.Save(ab.Build());
+
+builder.Services.AddSingleton<IAtletaRepository>(atletasRepository);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
