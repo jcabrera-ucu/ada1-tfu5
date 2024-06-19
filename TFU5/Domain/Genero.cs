@@ -1,4 +1,4 @@
-namespace TFU5;
+namespace TFU5.Domain;
 
 public enum Genero
 {

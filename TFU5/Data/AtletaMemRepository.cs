@@ -1,8 +1,6 @@
-using System.Collections.Generic;
+using TFU5.Domain;
 
-using TFU5;
-
-namespace TFU5;
+namespace TFU5.Data;
 
 public class AtletaMemRepository : IAtletaRepository
 {

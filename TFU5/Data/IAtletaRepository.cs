@@ -1,4 +1,6 @@
-namespace TFU5;
+using TFU5.Domain;
+
+namespace TFU5.Data;
 
 
 public interface IAtletaRepository
