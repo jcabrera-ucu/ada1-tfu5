@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/TFU5.props" />
+</Project>

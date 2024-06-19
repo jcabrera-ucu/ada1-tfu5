@@ -1,0 +1,6 @@
+@TFU5_HostAddress = http://localhost:5216
+
+GET {{TFU5_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
