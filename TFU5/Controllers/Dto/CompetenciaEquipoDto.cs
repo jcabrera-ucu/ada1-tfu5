@@ -4,7 +4,22 @@ using TFU5.Domain.Competencia;
 namespace TFU5;
 
 
-public class CompetenciaIndividualDto
+/*lass SubPuntuacionVisitor : ISubPuntuacionVisitor
+{
+    public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
+
+    public void VisitDistancia(PuntuacionDistancia distancia)
+    {
+        Puntuaciones.Add(new(PuntuacionDistancia.Identificador, distancia.DistanciaM.ToString()));
+    }
+
+    public void VisitTiempo(PuntuacionTiempo tiempo)
+    {
+        Puntuaciones.Add(new(PuntuacionTiempo.Identificador, tiempo.Segundos.ToString()));
+    }
+}*/
+
+public class CompetenciaEquipoDto
 {
     public Guid Id { get; set; }
 
@@ -16,18 +31,18 @@ public class CompetenciaIndividualDto
 
     public List<Juez> Jueces { get; set; }
 
-    public List<Atleta> Atletas { get; set; }
+    public List<Equipo> Equipos { get; set; }
 
     public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
 
-    public CompetenciaIndividualDto(CompetenciaIndividual competencia)
+    public CompetenciaEquipoDto(CompetenciaEquipo competencia)
     {
         Id = competencia.Id;
         Disciplina = new DisciplinaDto(competencia.Disciplina);
         Categoria = competencia.Categoria;
         Fecha = competencia.Fecha;
         Jueces = competencia.Jueces;
-        Atletas = competencia.Atletas;
+        Equipos = competencia.Equipos;
 
         var visitor = new SubPuntuacionVisitor();
 
