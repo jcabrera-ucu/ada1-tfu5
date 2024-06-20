@@ -31,7 +31,7 @@ public class AtletasController : ControllerBase
     [HttpPost(Name = "Create")]
     public ActionResult<Atleta> Create(CrearAtletaDto createSchema)
     {
-        List<Disciplina> disciplinas = [];
+        List<IDisciplina> disciplinas = [];
         foreach (var nombreDisciplina in createSchema.Disciplinas)
         {
             var disciplina = _disciplinaRepository.Get(nombreDisciplina);

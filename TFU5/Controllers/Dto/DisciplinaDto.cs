@@ -2,7 +2,7 @@ using TFU5.Domain;
 
 namespace TFU5;
 
-public class DisciplinaDto(Disciplina disciplina)
+public class DisciplinaDto(IDisciplina disciplina)
 {
     public string Nombre { get; set; } = disciplina.Nombre;
 

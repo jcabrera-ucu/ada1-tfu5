@@ -5,7 +5,7 @@ public class Atleta(string nombre,
                     DateOnly fecha,
                     Pais pais,
                     Genero genero,
-                    List<Disciplina> disciplinas)
+                    List<IDisciplina> disciplinas)
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -19,5 +19,5 @@ public class Atleta(string nombre,
 
     public Genero Genero { get; set; } = genero;
 
-    public List<Disciplina> Disciplinas { get; set; } = disciplinas;
+    public List<IDisciplina> Disciplinas { get; set; } = disciplinas;
 }

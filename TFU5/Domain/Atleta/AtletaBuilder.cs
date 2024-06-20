@@ -13,7 +13,7 @@ public class AtletaBuilder : IAtletaBuilder
 
     public Genero Genero { get; set; }
 
-    public List<Disciplina> Disciplinas { get; set; } = [];
+    public List<IDisciplina> Disciplinas { get; set; } = [];
 
     public Atleta Build()
     {
