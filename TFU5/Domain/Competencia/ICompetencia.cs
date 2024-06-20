@@ -15,6 +15,7 @@ public interface ICompetencia
 
     public void AgregarPuntuacion(IPuntuacion puntuacion);
 
-    // public bool PerteneceAtleta(Atleta atleta);
-    // public bool PerteneceEquipo(Equipo equipo);
+    public bool PerteneceAtleta(Guid atleta);
+
+    public bool PerteneceEquipo(Guid equipo);
 }

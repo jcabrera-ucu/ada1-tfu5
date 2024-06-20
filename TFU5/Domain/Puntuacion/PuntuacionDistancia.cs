@@ -3,16 +3,11 @@ using System.Text.Json;
 
 namespace TFU5.Domain;
 
-public class DescripcionPuntuacionDistancia
-{
-    public string Identificador { get; set; } = "distancia";
-
-    public string Unidad { get; set; } = "m";
-}
-
 public class PuntuacionDistancia: ISubPuntuacion
 {
     public double DistanciaM { get; set; }
+
+    public static string Identificador { get; } = "distancia";
 
     public PuntuacionDistancia()
     {
@@ -31,7 +26,7 @@ public class PuntuacionDistancia: ISubPuntuacion
 
     public DescSubPuntuacion Descripcion()
     {
-        return new DescSubPuntuacion("PuntuacionDistancia", Unidad.Metros);
+        return new DescSubPuntuacion(Identificador, Unidad.Metros);
     }
 
     public ISubPuntuacion Clone()

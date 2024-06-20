@@ -6,6 +6,10 @@ namespace TFU5.Data;
 
 public interface ICompetenciaRepository
 {
+    public CompetenciaIndividual? GetIndividual(Guid id);
+
+    public CompetenciaEquipo? GetEquipo(Guid id);
+
     public void Save(CompetenciaEquipo competencia);
 
     public void Save(CompetenciaIndividual competencia);

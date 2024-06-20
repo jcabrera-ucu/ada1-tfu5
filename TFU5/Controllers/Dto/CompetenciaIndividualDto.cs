@@ -4,19 +4,56 @@ using TFU5.Domain.Competencia;
 namespace TFU5;
 
 
-public class CompetenciaIndividualDto(CompetenciaIndividual competencia)
+class SubPuntuacionVisitor : ISubPuntuacionVisitor
 {
-    public Guid Id { get; set; } = competencia.Id;
+    public List<(string, object)> Puntuaciones { get; set; } = [];
 
-    public DisciplinaDto Disciplina { get; set; } = new DisciplinaDto(competencia.Disciplina);
+    public void VisitDistancia(PuntuacionDistancia distancia)
+    {
+        Puntuaciones.Add(( PuntuacionDistancia.Identificador, distancia.DistanciaM ));
+    }
 
-    public Categoria Categoria { get; set; } = competencia.Categoria;
+    public void VisitTiempo(PuntuacionTiempo tiempo)
+    {
+        Puntuaciones.Add(( PuntuacionTiempo.Identificador, tiempo.Segundos ));
+    }
+}
 
-    public DateOnly Fecha { get; set; } = competencia.Fecha;
+public class CompetenciaIndividualDto
+{
+    public Guid Id { get; set; }
 
-    public List<Juez> Jueces { get; set; } = competencia.Jueces;
+    public DisciplinaDto Disciplina { get; set; }
 
-    public List<Atleta> Atletas { get; set; } = competencia.Atletas;
+    public Categoria Categoria { get; set; }
 
-    public List<IPuntuacion> Puntuaciones { get; set; } = competencia.Puntuaciones;
+    public DateOnly Fecha { get; set; }
+
+    public List<Juez> Jueces { get; set; }
+
+    public List<Atleta> Atletas { get; set; }
+
+    public List<(string, object)> Puntuaciones { get; set; } = [];
+
+    public CompetenciaIndividualDto(CompetenciaIndividual competencia)
+    {
+        Id = competencia.Id;
+        Disciplina = new DisciplinaDto(competencia.Disciplina);
+        Categoria = competencia.Categoria;
+        Fecha = competencia.Fecha;
+        Jueces = competencia.Jueces;
+        Atletas = competencia.Atletas;
+
+        var visitor = new SubPuntuacionVisitor();
+
+        foreach (var puntuacion in competencia.Puntuaciones)
+        {
+            foreach (var sub in puntuacion.SubPuntuaciones)
+            {
+                sub.Accept(visitor);
+            }
+        }
+
+        Puntuaciones = visitor.Puntuaciones;
+    }
 }

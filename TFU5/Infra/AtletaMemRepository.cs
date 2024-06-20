@@ -23,7 +23,7 @@ public class AtletaMemRepository : IAtletaRepository
 
     public void Save(Atleta atleta)
     {
-        _atletas.Add(atleta.Id, atleta);
+        _atletas[atleta.Id] = atleta;
     }
 
     public List<Atleta> List()

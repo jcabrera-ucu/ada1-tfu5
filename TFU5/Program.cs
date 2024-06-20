@@ -25,11 +25,14 @@ var at1 = ab.Build();
 
 atletasRepository.Save(at1);
 
+var j = new Juez("JJ", "AA", [natacion]);
+
 var comp = new CompetenciaIndividual(
     natacion, 
     new Categoria(Genero.Masculino, CategoriaEdad.Mayor, CategoriaPeso.Cualquiera),
     new DateOnly(2024, 6, 19),
-    [at1]
+    [at1],
+    [j]
 );
 
 competenciaRepository.Save(comp);
