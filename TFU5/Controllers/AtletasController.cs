@@ -4,12 +4,6 @@ using TFU5.Domain;
 
 namespace TFU5.Controllers;
 
-public class CreateAtletaSchema
-{
-    public string Nombre { get; set; }
-    public string Apellido { get; set; }
-}
-
 [ApiController]
 [Route("[controller]")]
 public class AtletasController : ControllerBase
@@ -17,12 +11,15 @@ public class AtletasController : ControllerBase
     private readonly ILogger<AtletasController> _logger;
 
     private readonly IAtletaRepository _atleta_repository;
+    private readonly IDisciplinaRepository _disciplinaRepository;
 
     public AtletasController(ILogger<AtletasController> logger,
-                             IAtletaRepository atleta_repository)
+                             IAtletaRepository atleta_repository,
+                             IDisciplinaRepository disciplinaRepository)
     {
         _logger = logger;
         _atleta_repository = atleta_repository;
+        _disciplinaRepository = disciplinaRepository;
     }
 
     [HttpGet(Name = "List")]
@@ -32,8 +29,22 @@ public class AtletasController : ControllerBase
     }
 
     [HttpPost(Name = "Create")]
-    public Atleta Create(CreateAtletaSchema createSchema)
+    public ActionResult<Atleta> Create(CrearAtletaDto createSchema)
     {
+        List<Disciplina> disciplinas = [];
+        foreach (var nombreDisciplina in createSchema.Disciplinas)
+        {
+            var disciplina = _disciplinaRepository.Get(nombreDisciplina);
+            if (disciplina == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                disciplinas.Add(disciplina);
+            }
+        }
+
         var ab = new AtletaBuilder
         {
             Nombre = createSchema.Nombre,
@@ -41,7 +52,7 @@ public class AtletasController : ControllerBase
             Genero = Genero.Masculino,
             Pais = Pais.Uruguay,
             FechaDeNacimiento = new DateOnly(1991, 3, 27),
-            Disciplinas = [new Disciplina("MIDisciplina", [])]
+            Disciplinas = disciplinas,
         };
 
         var atleta = ab.Build();

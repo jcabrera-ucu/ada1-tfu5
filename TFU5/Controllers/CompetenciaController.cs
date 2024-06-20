@@ -27,6 +27,9 @@ public class CompetenciaController : ControllerBase
         _equipoRepository = equipoRepository;
     }
 
+    /// <summary>
+    /// Hola hola
+    /// </summary>
     [HttpGet()]
     [Route("Individuales")]
     public IEnumerable<CompetenciaIndividualDto> ListIndividuales()
@@ -77,14 +80,9 @@ public class CompetenciaController : ControllerBase
 
         foreach (var puntuacionDto in puntuar.Puntuaciones)
         {
-            if (puntuacionDto.Tiempo != null)
+            foreach (var subPuntuacion in puntuacionDto.Crear())
             {
-                puntuacion.Add(new PuntuacionTiempo(puntuacionDto.Tiempo.Segundos));
-            }
-
-            if (puntuacionDto.Distancia != null)
-            {
-                puntuacion.Add(new PuntuacionTiempo(puntuacionDto.Distancia.Metros));
+                puntuacion.Add(subPuntuacion);
             }
         }
 
@@ -128,14 +126,9 @@ public class CompetenciaController : ControllerBase
 
         foreach (var puntuacionDto in puntuar.Puntuaciones)
         {
-            if (puntuacionDto.Tiempo != null)
+            foreach (var subPuntuacion in puntuacionDto.Crear())
             {
-                puntuacion.Add(new PuntuacionTiempo(puntuacionDto.Tiempo.Segundos));
-            }
-
-            if (puntuacionDto.Distancia != null)
-            {
-                puntuacion.Add(new PuntuacionTiempo(puntuacionDto.Distancia.Metros));
+                puntuacion.Add(subPuntuacion);
             }
         }
 

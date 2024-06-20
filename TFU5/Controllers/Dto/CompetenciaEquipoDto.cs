@@ -4,21 +4,6 @@ using TFU5.Domain.Competencia;
 namespace TFU5;
 
 
-/*lass SubPuntuacionVisitor : ISubPuntuacionVisitor
-{
-    public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
-
-    public void VisitDistancia(PuntuacionDistancia distancia)
-    {
-        Puntuaciones.Add(new(PuntuacionDistancia.Identificador, distancia.DistanciaM.ToString()));
-    }
-
-    public void VisitTiempo(PuntuacionTiempo tiempo)
-    {
-        Puntuaciones.Add(new(PuntuacionTiempo.Identificador, tiempo.Segundos.ToString()));
-    }
-}*/
-
 public class CompetenciaEquipoDto
 {
     public Guid Id { get; set; }

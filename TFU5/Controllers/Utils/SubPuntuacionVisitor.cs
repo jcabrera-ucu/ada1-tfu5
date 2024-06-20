@@ -1,7 +1,7 @@
 using TFU5.Domain;
 
-
 namespace TFU5;
+
 class SubPuntuacionVisitor : ISubPuntuacionVisitor
 {
     public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
@@ -14,5 +14,10 @@ class SubPuntuacionVisitor : ISubPuntuacionVisitor
     public void VisitTiempo(PuntuacionTiempo tiempo)
     {
         Puntuaciones.Add(new(PuntuacionTiempo.Identificador, tiempo.Segundos.ToString()));
+    }
+
+    public void VisitPuntos(PuntuacionPuntos puntos)
+    {
+        Puntuaciones.Add(new(PuntuacionPuntos.Identificador, puntos.Puntos.ToString()));
     }
 }

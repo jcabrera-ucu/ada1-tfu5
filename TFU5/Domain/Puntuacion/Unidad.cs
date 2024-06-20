@@ -6,4 +6,5 @@ public enum Unidad
     Metros,
     Segundos,
     Kilos,
+    Puntos,
 }
