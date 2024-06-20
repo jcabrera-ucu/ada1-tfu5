@@ -1,5 +1,4 @@
 using TFU5.Domain;
-using TFU5.Domain.Competencia;
 
 namespace TFU5;
 

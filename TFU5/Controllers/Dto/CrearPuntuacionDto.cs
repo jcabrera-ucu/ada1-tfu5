@@ -10,7 +10,7 @@ public class PuntuarDistanciaDto
     public double Metros { get; set; }
 }
 
-public class PuntuacionDto
+public class CrearPuntuacionDto
 {
     public PuntuarTiempoDto? Tiempo { get; set; }
 

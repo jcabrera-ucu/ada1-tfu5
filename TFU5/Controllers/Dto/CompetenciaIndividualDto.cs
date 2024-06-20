@@ -6,16 +6,16 @@ namespace TFU5;
 
 class SubPuntuacionVisitor : ISubPuntuacionVisitor
 {
-    public List<(string, object)> Puntuaciones { get; set; } = [];
+    public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
 
     public void VisitDistancia(PuntuacionDistancia distancia)
     {
-        Puntuaciones.Add(( PuntuacionDistancia.Identificador, distancia.DistanciaM ));
+        Puntuaciones.Add(new(PuntuacionDistancia.Identificador, distancia.DistanciaM.ToString()));
     }
 
     public void VisitTiempo(PuntuacionTiempo tiempo)
     {
-        Puntuaciones.Add(( PuntuacionTiempo.Identificador, tiempo.Segundos ));
+        Puntuaciones.Add(new(PuntuacionTiempo.Identificador, tiempo.Segundos.ToString()));
     }
 }
 
@@ -33,7 +33,7 @@ public class CompetenciaIndividualDto
 
     public List<Atleta> Atletas { get; set; }
 
-    public List<(string, object)> Puntuaciones { get; set; } = [];
+    public List<CompetenciaPuntuacionDto> Puntuaciones { get; set; } = [];
 
     public CompetenciaIndividualDto(CompetenciaIndividual competencia)
     {

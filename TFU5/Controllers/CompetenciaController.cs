@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TFU5.Data;
 using TFU5.Domain;
@@ -42,30 +41,32 @@ public class CompetenciaController : ControllerBase
 
     [HttpPost()]
     [Route("Individual/Puntuar")]
-    public bool PuntuarIndividual(PuntuarCompetenciaIndividualDto puntuar)
+    public ActionResult<CompetenciaIndividualDto> PuntuarIndividual(PuntuarCompetenciaIndividualDto puntuar)
     {
         var competencia = _competenciaRepository.GetIndividual(puntuar.IdCompetencia);
 
         if (competencia == null)
         {
-            Console.WriteLine($"COMPETENCIA NULL");
-            return false;
+            return NotFound();
         }
 
         var juez = competencia.Jueces.Find(x => x.Id == puntuar.IdJuez);
 
         if (juez == null)
         {
-            Console.WriteLine($"JUEZ NULL");
-            return false;
+            return NotFound();
         }
 
         var atleta = _atletaRepository.Get(puntuar.IdAtleta);
 
         if (atleta == null)
         {
-            Console.WriteLine($"ATLETA NULL");
-            return false;
+            return NotFound();
+        }
+
+        if (!competencia.PerteneceAtleta(atleta.Id))
+        {
+            return NotFound();
         }
 
         var puntuacion = new PuntuacionIndividual(competencia, atleta);
@@ -87,6 +88,6 @@ public class CompetenciaController : ControllerBase
 
         _competenciaRepository.Save(competencia);
 
-        return true;
+        return new CompetenciaIndividualDto(competencia);
     }
 }

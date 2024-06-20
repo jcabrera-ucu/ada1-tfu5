@@ -9,5 +9,5 @@ public class PuntuarCompetenciaIndividualDto
 
     public Guid IdAtleta { get; set; }
     
-    public List<PuntuacionDto> Puntuaciones { get; set; } = [];
+    public List<CrearPuntuacionDto> Puntuaciones { get; set; } = [];
 }
